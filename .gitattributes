@@ -1,0 +1,23 @@
+# based on https://help.github.com/articles/dealing-with-line-endings
+
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files we want to always be normalized and converted 
+# to native line endings on checkout.
+*.cs text
+
+# Declare files that will always have CRLF line endings on checkout.
+*.csproj text eol=crlf
+*.sln text eol=crlf
+
+# Explicitly declare files we do not want to be converted 
+*.css -text
+*.config -text
+*.js -text
+*.less -text
+*.map -text
+*.nuspec -text
+*.ps1 -text
+*.transform -text
+*.txt -text
