@@ -3,14 +3,16 @@ using System.Collections.Generic;
 
 namespace DependencyInjectionDemo.Core
 {
-	public class VolatileRecipeRepositoryUsingNew : IRecipeRepository
+	public class RecipeRepositoryUsingAbstractFactory : IRecipeRepository
 	{
 		private readonly Dictionary<Guid, Recipe> _recipes = new Dictionary<Guid, Recipe>();
 		public ILog Log { get; private set; }
+		public IClock Clock { get; private set; }
 
-		public VolatileRecipeRepositoryUsingNew()
+		public RecipeRepositoryUsingAbstractFactory(ILogFactory logFactory, IClockFactory clockFactory)
 		{
-			Log = new VolatileLog();
+			Log = logFactory.Get();
+			Clock = clockFactory.Get();
 		}
 
 		public Recipe Get(Guid id)
@@ -18,7 +20,7 @@ namespace DependencyInjectionDemo.Core
 			Recipe result;
 			if (!_recipes.TryGetValue(id, out result))
 			{
-				Log.Error("id not found");
+				Log.Error(Clock.Now, "id not found");
 				throw new ArgumentException("id not found");
 			}
 			return result;

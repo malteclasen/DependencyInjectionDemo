@@ -11,7 +11,7 @@ namespace DependencyInjectionDemo.Tests
 		[TestMethod]
 		public void LogsInvalidGet()
 		{
-			var repository = new VolatileRecipeRepositoryUsingFactory();
+			var repository = new RecipeRepositoryUsingFactory();
 
 			repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
 

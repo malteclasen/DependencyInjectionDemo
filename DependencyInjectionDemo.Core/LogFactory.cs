@@ -1,8 +1,8 @@
 namespace DependencyInjectionDemo.Core
 {
-	public class VolatileLogFactory : ILogFactory
+	public class LogFactory : ILogFactory
 	{
-		readonly ILog Log = new VolatileLog();
+		readonly ILog Log = new Log();
 
 		public ILog Get()
 		{

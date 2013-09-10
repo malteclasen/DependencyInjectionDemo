@@ -11,24 +11,26 @@ namespace DependencyInjectionDemo.Tests
 		[TestMethod]
 		public void LogsInvalidGet()
 		{
-			ServiceLocator.Log = new VolatileLog();
-			var repository = new VolatileRecipeRepositoryUsingServiceLocator();
+			ServiceLocator.Log = new Log();
+			ServiceLocator.Clock = new StaticClock();
+			var repository = new RecipeRepositoryUsingServiceLocator();
 
 			repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
 
 			ServiceLocator.Log.Get().Should().HaveCount(1);
 		}
 
-		//[TestMethod]
-		//public void LogsMultipleInvalidGets()
-		//{
-		//	var repository = new VolatileRecipeRepositoryUsingServiceLocator();
+		[TestMethod]
+		public void LogsMultipleInvalidGets()
+		{
+			ServiceLocator.Log = new Log();
+			var repository = new RecipeRepositoryUsingServiceLocator();
 
-		//	repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
-		//	repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
+			repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
+			repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
 
-		//	ServiceLocator.Log.Get().Should().HaveCount(2);
-		//}
+			ServiceLocator.Log.Get().Should().HaveCount(2);
+		}
 	}
 
 

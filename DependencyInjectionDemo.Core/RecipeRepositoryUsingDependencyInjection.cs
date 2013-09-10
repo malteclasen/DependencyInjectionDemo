@@ -1,16 +1,21 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DependencyInjectionDemo.Core
 {
-	public class VolatileRecipeRepositoryUsingServiceLocator : IRecipeRepository
+	public class RecipeRepositoryUsingDependencyInjection : IRecipeRepository
 	{
 		private readonly Dictionary<Guid, Recipe> _recipes = new Dictionary<Guid, Recipe>();
 		private readonly ILog _log;
+		private readonly IClock _clock;
 
-		public VolatileRecipeRepositoryUsingServiceLocator()
+		public RecipeRepositoryUsingDependencyInjection(ILog log, IClock clock)
 		{
-				_log = ServiceLocator.Log;
+			_log = log;
+			_clock = clock;
 		}
 
 		public Recipe Get(Guid id)
@@ -18,7 +23,7 @@ namespace DependencyInjectionDemo.Core
 			Recipe result;
 			if (!_recipes.TryGetValue(id, out result))
 			{
-				_log.Error("id not found");
+				_log.Error(_clock.Now, "id not found");
 				throw new ArgumentException("id not found");
 			}
 			return result;
@@ -27,6 +32,6 @@ namespace DependencyInjectionDemo.Core
 		public void Put(Recipe recipe)
 		{
 			_recipes[recipe.Id] = recipe;
-		}		
+		}
 	}
 }
