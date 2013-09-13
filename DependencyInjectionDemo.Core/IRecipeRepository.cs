@@ -6,5 +6,6 @@ namespace DependencyInjectionDemo.Core
 	{
 		Recipe Get(Guid id);
 		void Put(Recipe recipe);
+		long Count { get; }
 	}
 }

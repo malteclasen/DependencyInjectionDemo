@@ -29,6 +29,8 @@ namespace DependencyInjectionDemo.Core
 		public void Put(Recipe recipe)
 		{
 			_recipes[recipe.Id] = recipe;
-		}		
+		}
+
+		public long Count { get { return _recipes.Count; } }
 	}
 }

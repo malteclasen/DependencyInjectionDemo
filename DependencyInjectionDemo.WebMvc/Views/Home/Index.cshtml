@@ -1,0 +1,7 @@
+﻿@model DependencyInjectionDemo.WebMvc.Models.Home.RecipeCount
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Recipe Count</h2>
+<p>There are @Model.NumRecipes recipes available at @Model.Time.ToLongTimeString().</p>

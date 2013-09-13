@@ -65,11 +65,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AbstractFactoryTest.cs" />
+    <Compile Include="CastleWindsorTest.cs" />
     <Compile Include="DependencyInjectionTest.cs" />
     <Compile Include="FactoryTest.cs" />
     <Compile Include="NewTest.cs" />
+    <Compile Include="NinjectTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLocatorTest.cs" />
+    <Compile Include="StructureMapTest.cs" />
+    <Compile Include="UnityTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DependencyInjectionDemo.Core\DependencyInjectionDemo.Core.csproj">

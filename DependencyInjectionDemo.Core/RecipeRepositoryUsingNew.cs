@@ -30,5 +30,7 @@ namespace DependencyInjectionDemo.Core
 		{
 			_recipes[recipe.Id] = recipe;
 		}
+
+		public long Count { get { return _recipes.Count; } }
 	}
 }

@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjectionDemo.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjectionDemo.Tests", "DependencyInjectionDemo.Tests\DependencyInjectionDemo.Tests.csproj", "{9BF2DAC4-0C42-4644-95DC-850D0D408993}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjectionDemo.Console", "DependencyInjectionDemo.Console\DependencyInjectionDemo.Console.csproj", "{E8339D00-214E-4F19-AA8F-86C11A93BDAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjectionDemo.WebMvc", "DependencyInjectionDemo.WebMvc\DependencyInjectionDemo.WebMvc.csproj", "{E2DA7CE0-680F-45E4-9B3D-002350DC1BE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{9BF2DAC4-0C42-4644-95DC-850D0D408993}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BF2DAC4-0C42-4644-95DC-850D0D408993}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BF2DAC4-0C42-4644-95DC-850D0D408993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8339D00-214E-4F19-AA8F-86C11A93BDAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8339D00-214E-4F19-AA8F-86C11A93BDAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8339D00-214E-4F19-AA8F-86C11A93BDAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8339D00-214E-4F19-AA8F-86C11A93BDAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2DA7CE0-680F-45E4-9B3D-002350DC1BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2DA7CE0-680F-45E4-9B3D-002350DC1BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2DA7CE0-680F-45E4-9B3D-002350DC1BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2DA7CE0-680F-45E4-9B3D-002350DC1BE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
