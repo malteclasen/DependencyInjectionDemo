@@ -4,6 +4,7 @@ namespace DependencyInjectionDemo.Core
 	{
 		public IClock Get()
 		{
+			//todo: Context detection Voodoo to select clock type
 			return new SystemClock();
 		}
 	}
