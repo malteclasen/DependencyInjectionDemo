@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DependencyInjectionDemo.Core;
+using Ninject;
 
 namespace DependencyInjectionDemo.Console
 {
@@ -28,12 +29,12 @@ namespace DependencyInjectionDemo.Console
 	{
 		static void Main(string[] args)
 		{
-			//todo: use dependency injection			
-			var log = new Log();
-			var clock = new SystemClock();
-			var repository = new RecipeRepositoryUsingDependencyInjection(log, clock);
-			
-			var recipeCounter = new RecipeCounter(clock, repository);
+			var kernel = new StandardKernel();
+			kernel.Bind<IClock>().To<SystemClock>();
+			kernel.Bind<ILog>().To<Log>();
+			kernel.Bind<IRecipeRepository>().To<RecipeRepositoryUsingDependencyInjection>();
+
+			var recipeCounter = kernel.Get<RecipeCounter>();
 			recipeCounter.Write();
 		}
 	}
