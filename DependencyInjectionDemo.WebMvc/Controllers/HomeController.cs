@@ -10,20 +10,24 @@ namespace DependencyInjectionDemo.WebMvc.Controllers
 {
     public class HomeController : Controller
     {
-        //
+	    private readonly IClock _clock;
+	    private readonly IRecipeRepository _repository;
+
+	    public HomeController(IClock clock, IRecipeRepository repository)
+	    {
+		    _clock = clock;
+		    _repository = repository;
+	    }
+
+	    //
         // GET: /Home/
 
         public ActionResult Index()
         {
-	        //todo: use dependency injection			
-			var log = new Log();
-	        var clock = new SystemClock();
-	        var repository = new RecipeRepositoryUsingDependencyInjection(log, clock);
-
-	        var recipeCount = new RecipeCount()
+	        var recipeCount = new RecipeCount
 		        {
-			        Time = clock.Now,
-			        NumRecipes = repository.Count
+			        Time = _clock.Now,
+			        NumRecipes = _repository.Count
 		        };
 
             return View(recipeCount);
