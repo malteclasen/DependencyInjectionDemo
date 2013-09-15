@@ -25,5 +25,49 @@ namespace DependencyInjectionDemo.Tests
 			log.Get().Should().HaveCount(1);
 		}
 		
+		private static class KernelLocator
+		{
+			public static IKernel Kernel { get; set; }
+		}
+
+		private class SelfInjectingClass
+		{
+			[Inject]
+			public ILog Log { get; set; }
+
+			public SelfInjectingClass()
+			{
+				KernelLocator.Kernel.Inject(this);
+			}
+
+			public SelfInjectingClass(ILog log)
+			{
+				Log = log;
+			}
+		}
+
+		[TestMethod]
+		public void Inject()
+		{
+			var kernel = new StandardKernel();
+			kernel.Bind<ILog>().To<Log>().InSingletonScope();
+
+			var selfInjectingClass = kernel.Get<SelfInjectingClass>();
+
+			selfInjectingClass.Log.Should().NotBeNull();
+		}
+
+		[TestMethod]
+		public void InjectThis()
+		{
+			var kernel = new StandardKernel();
+			KernelLocator.Kernel = kernel;
+			kernel.Bind<ILog>().To<Log>().InSingletonScope();
+
+			var selfInjectingClass = new SelfInjectingClass();
+
+			selfInjectingClass.Log.Should().NotBeNull();
+		}
+
 	}
 }
