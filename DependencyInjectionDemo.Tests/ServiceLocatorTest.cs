@@ -26,6 +26,9 @@ namespace DependencyInjectionDemo.Tests
 			ServiceLocator.Log = new Log();
 			var repository = new RecipeRepositoryUsingServiceLocator();
 
+			#region expected fail
+			// this test should fail in isolated runs due to the missing initialization of ServiceLocator.Clock
+			#endregion
 			repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
 			repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
 

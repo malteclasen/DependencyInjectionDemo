@@ -2,6 +2,7 @@ using System;
 using DependencyInjectionDemo.Core;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ninject;
 
 namespace DependencyInjectionDemo.Tests
 {
@@ -11,15 +12,17 @@ namespace DependencyInjectionDemo.Tests
 		[TestMethod]
 		public void LogsInvalidGet()
 		{
-			//todo: configure kernel
-			//todo: create repository
-			//var log = new Log();
-			//var clock = new StaticClock();
-			//var repository = new RecipeRepositoryUsingDependencyInjection(log, clock);
+			var kernel = new StandardKernel();
+			kernel.Bind<IClock>().To<StaticClock>();
+			kernel.Bind<ILog>().To<Log>().InSingletonScope();
+			kernel.Bind<IRecipeRepository>().To<RecipeRepositoryUsingDependencyInjection>();
 
-			//repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
+			var log = kernel.Get<ILog>();
+			var repository = kernel.Get<IRecipeRepository>();
 
-			//log.Get().Should().HaveCount(1);
+			repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
+
+			log.Get().Should().HaveCount(1);
 		}
 		
 	}

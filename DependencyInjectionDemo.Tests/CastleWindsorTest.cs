@@ -1,3 +1,8 @@
+using System;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using DependencyInjectionDemo.Core;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DependencyInjectionDemo.Tests
@@ -8,15 +13,17 @@ namespace DependencyInjectionDemo.Tests
 		[TestMethod]
 		public void LogsInvalidGet()
 		{
-			//todo: configure kernel
-			//todo: create repository
-			//var log = new Log();
-			//var clock = new StaticClock();
-			//var repository = new RecipeRepositoryUsingDependencyInjection(log, clock);
+			var container = new WindsorContainer();
+			container.Register(Component.For<ILog>().ImplementedBy<Log>().LifestyleSingleton());
+			container.Register(Component.For<IClock>().ImplementedBy<StaticClock>());
+			container.Register(Component.For<IRecipeRepository>().ImplementedBy<RecipeRepositoryUsingDependencyInjection>().LifestyleTransient());
 
-			//repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
+			var log = container.Resolve<ILog>();
+			var repository = container.Resolve<IRecipeRepository>();
 
-			//log.Get().Should().HaveCount(1);
+			repository.Invoking(r => r.Get(Guid.NewGuid())).ShouldThrow<ArgumentException>();
+
+			log.Get().Should().HaveCount(1);
 		}
 
 	}
